@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <script>
+      function GetURLParameter(sParam){
+       var sPageURL = window.location.href;
+       var sURLVariables = sPageURL.split('&');
+       console.log(sURLVariables);
+       for (var i = 0; i < sURLVariables.length; i++){
+         var sParameterName = sURLVariables[i].split('=');
+         if (sParameterName[0] == sParam){
+            return sParameterName[1];
+          }
+        }
+      }
+
+      var base = GetURLParameter('base');
+      var relative = GetURLParameter('relative');
+      var custom = GetURLParameter('custom');
+      var web_url = base + relative;
+      var native_url = custom + relative;
+
+
+      $(document).ready(function(){
+        window.location = native_url;
+        setTimeout(function(){
+          console.log("timeout works");
+          window.location = web_url;
+        }, 3000);
+      });
+    </script>
+  </head>
+</html>
+
