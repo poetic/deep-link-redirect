@@ -4,8 +4,8 @@
     <script>
       function GetURLParameter(sParam){
        var sPageURL = window.location.href;
-       var sURLVariables = sPageURL.split('&');
-       console.log(sURLVariables);
+       var sURLParts = sPageURL.split('/')
+       var sURLVariables = sURLParts[sURLParts.length-1].split('?')[1].split('&');
        for (var i = 0; i < sURLVariables.length; i++){
          var sParameterName = sURLVariables[i].split('=');
          if (sParameterName[0] == sParam){
@@ -15,19 +15,16 @@
       }
 
       var base = GetURLParameter('base');
-      var relative = GetURLParameter('relative');
       var custom = GetURLParameter('custom');
-      var web_url = base + relative;
-      var native_url = custom + relative;
+      var relative = GetURLParameter('relative');
 
+      var web_url = decodeURIComponent(base + relative);
+      var native_url = decodeURIComponent(custom + relative);
 
-      $(document).ready(function(){
-        window.location = native_url;
-        setTimeout(function(){
-          console.log("timeout works");
-          window.location = web_url;
-        }, 3000);
-      });
+      window.location = native_url;
+      setTimeout(function(){
+        window.location = web_url;
+      }, 3000);
     </script>
   </head>
 </html>
