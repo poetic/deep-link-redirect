@@ -7,19 +7,18 @@
        var sURLParts = sPageURL.split('/')
        var sURLVariables = sURLParts[sURLParts.length-1].split('?')[1].split('&');
        for (var i = 0; i < sURLVariables.length; i++){
-         var sParameterName = sURLVariables[i].split('=');
+         var sParameterName = sURLVariables[i].split('=3D');
          if (sParameterName[0] == sParam){
-            return sParameterName[1];
-          }
-        }
+             return sParameterName[1];
+         }
+       }
       }
 
       var base = GetURLParameter('base');
       var custom = GetURLParameter('custom');
-      var relative = GetURLParameter('relative');
 
-      var web_url = decodeURIComponent(base + relative);
-      var native_url = decodeURIComponent(custom + relative);
+      var web_url = decodeURIComponent(base);
+      var native_url = decodeURIComponent(custom);
 
       window.location = native_url;
       setTimeout(function(){
